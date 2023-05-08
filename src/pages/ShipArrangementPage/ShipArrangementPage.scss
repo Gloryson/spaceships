@@ -1,0 +1,28 @@
+.ship__arrangement__page {
+  display: grid;
+  place-items: center;
+  height: 100vh;
+
+  h1 {
+    font-size: 32px;
+  }
+
+  button {
+    width: 200px;
+    height: 40px;
+    border: 3px solid white;
+    border-radius: 5px;
+    font-size: 24px;
+    font-weight: 500;
+    cursor: pointer;
+
+    &:hover {
+      border-color: #ff00a6;
+      color: #ff00a6;
+    }
+
+    &:active {
+      border-color: #ff00a6bb;
+    }
+  }
+}
