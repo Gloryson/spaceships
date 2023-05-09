@@ -8,6 +8,7 @@ export interface Cell {
   status: string;
   position: {
     y: number,
-    x: number
+    x: number,
+    start: boolean
   };
 }
