@@ -6,43 +6,4 @@
   background-color: #00000080;
   border-radius: 5px;
   position: relative;
-
-  .cell {
-    border: 1px solid #ffffff30;
-    border-radius: 5px;
-  }
-}
-
-.flagship, .battleship, .cruiser, .destroyer {
-  height: 50px;
-  position: absolute;
-  cursor: grab;
-
-  &:active {
-    cursor: grabbing;
-  }
-}
-
-.flagship {
-  width: 200px;
-  background: url(../../assets/img/ships/flagship.png) no-repeat center;
-  background-size: 100%;
-}
-
-.battleship {
-  width: 150px;
-  background: url(../../assets/img/ships/battleship.png) no-repeat center;
-  background-size: 100%;
-}
-
-.cruiser {
-  width: 100px;
-  background: url(../../assets/img/ships/cruiser.png) no-repeat center;
-  background-size: 100%;
-}
-
-.destroyer {
-  width: 50px;
-  background: url(../../assets/img/ships/destroyer.png) no-repeat center;
-  background-size: 100%;
 }

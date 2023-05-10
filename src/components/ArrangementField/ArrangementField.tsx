@@ -1,5 +1,6 @@
 import { createRandomFieldMatrix } from '../../helpers';
 import { Cell } from '../../types/interfaces';
+import { FieldCell, Spaceship } from '../../components';
 import './ArrangementField.scss';
 
 
@@ -9,17 +10,16 @@ export function ArrangementField () {
   const field: Cell[][] = createRandomFieldMatrix();
 
   return(
-    <div className="arrangement__field">
+    <div className='arrangement__field' onDragOver={(e) => e.preventDefault()}>
       {
-        field.map(e => e.map(g => {
-          if (g.position.start) {
-            return <div className={g.status} style={{top: `${g.position.y * 10}%`, left: `${g.position.x * 10}%`}}></div>
+        field.map(row => row.map(cell => {
+          if (cell.ship.start) {
+            return <>
+              <Spaceship cell={cell}/>
+              <FieldCell />
+            </>
           }
-        }))
-      }
-      {   
-        field.map(e => e.map(g => {
-          return <div className='cell'></div>
+          return <FieldCell />
         }))
       }
     </div>
