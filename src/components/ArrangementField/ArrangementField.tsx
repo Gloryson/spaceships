@@ -1,13 +1,13 @@
-import { createRandomFieldMatrix } from '../../helpers';
 import { Cell } from '../../types/interfaces';
 import { FieldCell, Spaceship } from '../../components';
+import { useAppSelector } from '../../store/store';
 import './ArrangementField.scss';
 
 
 
 export function ArrangementField () {
 
-  const field: Cell[][] = createRandomFieldMatrix();
+  const field: Cell[][] = useAppSelector(state => state.playerField.field);
 
   return(
     <div className='arrangement__field' onDragOver={(e) => e.preventDefault()}>
@@ -15,11 +15,11 @@ export function ArrangementField () {
         field.map(row => row.map(cell => {
           if (cell.ship.start) {
             return <>
+              <FieldCell cell={cell}/>
               <Spaceship cell={cell}/>
-              <FieldCell />
             </>
           }
-          return <FieldCell />
+          return <FieldCell cell={cell}/>
         }))
       }
     </div>
