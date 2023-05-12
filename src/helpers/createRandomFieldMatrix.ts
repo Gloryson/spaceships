@@ -9,16 +9,16 @@ export function createRandomFieldMatrix (): Cell[][] {
       return {
         status: 'free', 
         position: {y: rowIndex, x: cellIndex}, 
-        ship: {type: '', length: 0, start: false}
+        ship: {type: '', length: 0, start: false, dragSection: 0}
       }
     })
   })
   
   const ships: Ship[] = [
-    { type: 'flagship', length: 4, start: false },
-    { type: 'battleship', length: 3, start: false },
-    { type: 'cruiser', length: 2, start: false },
-    { type: 'destroyer', length: 1, start: false }
+    { type: 'flagship', length: 4, start: false, dragSection: 0 },
+    { type: 'battleship', length: 3, start: false, dragSection: 0 },
+    { type: 'cruiser', length: 2, start: false, dragSection: 0 },
+    { type: 'destroyer', length: 1, start: false, dragSection: 0 }
   ];
 
 

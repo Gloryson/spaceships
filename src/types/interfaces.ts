@@ -2,6 +2,7 @@ export interface Ship {
   type: string;
   length: number;
   start: boolean;
+  dragSection: number;
 }
 
 export interface Cell {

@@ -6,7 +6,7 @@ export function checkFreeSpaceForShip (field: Cell[][], row: number, cell: numbe
   const end: number = cell + shipLength + 1;
 
   for (let i: number = row - 1; i <= row + 1; i++) {
-    if (field[i] && !field[i].slice(start, end).every(cell => cell.status === 'free' || cell.status === 'nearby' || cell.status === 'GO')) return false;
+    if (field[i] && field[i].slice(start, end).some(cell => cell.status === 'ship')) return false;
   }
   
   return true;
