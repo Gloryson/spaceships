@@ -11,13 +11,20 @@ export function FieldCell ( {cell}: {cell: Cell} ) {
   const dispatch = useAppDispatch();
 
   return(
-    <div 
+    <div
       className={`cell  ${isDragging && cell.status === 'correct' ? 'cell__correct' : ''}`}
-      onDrop={(e) => {
+
+      onDragStart={e => e.preventDefault()}
+
+      onDrop={e => {
         const cellData: Cell = JSON.parse(e.dataTransfer.getData('draggableShip'));
-        cellData.position.x = cell.position.x - cellData.ship.dragSection;
-        cellData.position.y = cell.position.y;
-        dispatch(setFieldAfterDrop(cellData));
+        const x: number = cell.position.x - cellData.ship.dragSection;
+        const y: number = cell.position.y;
+        if (x >= 0 && x + cellData.ship.length <= 10) {
+          cellData.position.x = x;
+          cellData.position.y = y;
+          dispatch(setFieldAfterDrop(cellData));
+        }
       }}
     ></div>
   )

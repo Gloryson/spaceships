@@ -1,60 +1,56 @@
 import { useState } from 'react';
-import { Cell } from '../../types/interfaces';
 import { useAppDispatch, useAppSelector } from '../../store/store';
-import { setFieldAfterDrop, setFieldToDragMode, setIsDragging } from '../../store/playerFieldSlice';
+import { setFieldAfterDrop, setFieldToDragMode } from '../../store/playerFieldSlice';
+import { Cell } from '../../types/interfaces';
 import './Spaceship.scss';
 
 
 export function Spaceship ( {cell}: {cell: Cell} ) {
 
   const dispatch = useAppDispatch();
-  const { isEditField, isDragging } = useAppSelector(state => state.playerField);
-  
-  const [position, setPosition] = useState({
-    startX: 0,
-    startY: 0,
-    x: cell.position.x * 10,
-    y: cell.position.y * 10,
-    z: 0,
-    visible: true
-  })
+  const { isEditField } = useAppSelector(state => state.playerField);
+  const [zIndexState, setZIndexState] = useState(0);
 
 
   return isEditField ? (
     
     <div
       draggable 
-      className={cell.ship.type + `  ${position.visible ? '' : 'off'}`}
-      style={{ top: `${position.y}%`, left: `${position.x}%`, zIndex: position.z }}
-      onDragStart={(e) => {
-        const data: Cell = {...cell, ship: {... cell.ship, dragSection: Math.floor(e.nativeEvent.offsetX / 50)}}
-        e.dataTransfer.setData('draggableShip', JSON.stringify(data))
-        dispatch(setIsDragging(true))
-        dispatch(setFieldToDragMode(cell))
-        setPosition(pos => ({ ...pos, startX: e.clientX, startY: e.clientY }));
+      className={cell.ship.type}
+
+      style={{
+        top: `${cell.position.y * 10}%`,
+        left: `${cell.position.x * 10}%`,
+        zIndex: zIndexState
       }}
-      onDrag={(e) => {
-        setPosition(pos => ({
-          ...pos,
-          x: cell.position.x * 10 + (e.clientX - pos.startX) * 0.2,
-          y: cell.position.y * 10 + (e.clientY - pos.startY) * 0.2,
-          z: -1
-        }));
+
+      onDragStart={e => {
+        const data: Cell = { ...cell, ship: { ... cell.ship, dragSection: Math.floor(e.nativeEvent.offsetX / 50) } };
+        e.dataTransfer.setData('draggableShip', JSON.stringify(data));
+        dispatch(setFieldToDragMode(cell));
       }}
+
+      onDrag={() => setZIndexState(-1)}
+
       onDragEnd={() => {
-        if (isDragging) {
-          setPosition(pos => ({ ...pos, x: cell.position.x * 10, y: cell.position.y * 10, z: 0 }))
-          dispatch(setFieldAfterDrop(cell));
-        }
-        if (!isDragging) setPosition(pos => ({ ...pos, visible: false}));
+        setZIndexState(0);
+        dispatch(setFieldAfterDrop(cell));
       }}
     ></div>
 
   ) : (
 
-    <div 
+    <div
       className={cell.ship.type}
-      style={{ top: `${position.y}%`, left: `${position.x}%`, zIndex: position.z }}
+
+      style={{
+        top: `${cell.position.y * 10}%`,
+        left: `${cell.position.x * 10}%`,
+        zIndex: zIndexState,
+        cursor: 'default'
+      }}
+      
+      onDragStart={e => e.preventDefault()}
     ></div>
 
   )

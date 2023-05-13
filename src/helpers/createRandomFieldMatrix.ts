@@ -1,5 +1,5 @@
-import { Cell, Ship } from '../types/interfaces';
 import { checkFreeSpaceForShip } from './checkFreeSpaceForShip';
+import { Cell, Ship } from '../types/interfaces';
 
 
 export function createRandomFieldMatrix (): Cell[][] {
