@@ -46,7 +46,7 @@ export function Spaceship ( {cell}: {cell: Cell} ) {
       style={{
         top: `${cell.position.y * 10}%`,
         left: `${cell.position.x * 10}%`,
-        zIndex: zIndexState,
+        zIndex: -1,
         cursor: 'default'
       }}
       

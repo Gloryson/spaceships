@@ -1,5 +1,5 @@
 .flagship, .battleship, .cruiser, .destroyer {
-  height: 50px;
+  height: calc(100% * 0.1);
   position: absolute;
   cursor: grab;
 
@@ -9,29 +9,25 @@
 }
 
 .flagship {
-  width: 200px;
+  width: calc(100% * 0.4);
   background: url(../../assets/img/ships/flagship.png) no-repeat center;
   background-size: 100%;
 }
 
 .battleship {
-  width: 150px;
+  width: calc(100% * 0.3);
   background: url(../../assets/img/ships/battleship.png) no-repeat center;
   background-size: 100%;
 }
 
 .cruiser {
-  width: 100px;
+  width: calc(100% * 0.2);
   background: url(../../assets/img/ships/cruiser.png) no-repeat center;
   background-size: 100%;
 }
 
 .destroyer {
-  width: 50px;
+  width: calc(100% * 0.1);
   background: url(../../assets/img/ships/destroyer.png) no-repeat center;
   background-size: 100%;
-}
-
-.off {
-  display: none;
 }

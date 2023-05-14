@@ -1,0 +1,30 @@
+.enemy__ship__list {
+  display: grid;
+  grid-template: repeat(1fr, 10) / 1fr;
+  padding: 20px;
+  
+  .enemy__ship__list__flagship {
+    background: url(../../assets/img/ships/flagship-enemy.png) no-repeat right;
+    background-size: 100%;
+  }
+  
+  .enemy__ship__list__battleship {
+    background: url(../../assets/img/ships/battleship-enemy.png) no-repeat right;
+    background-size: 75%;
+  }
+  
+  .enemy__ship__list__cruiser {
+    background: url(../../assets/img/ships/cruiser-enemy.png) no-repeat right;
+    background-size: 50%;
+  }
+  
+  .enemy__ship__list__destroyer {
+    background: url(../../assets/img/ships/destroyer-enemy.png) no-repeat right;
+    background-size: 25%;
+  }
+
+  .destroyed {
+    transition-duration: 3s;
+    transform: translateX(100%);
+  }
+}

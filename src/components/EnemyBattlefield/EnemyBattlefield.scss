@@ -1,0 +1,10 @@
+.enemy__battlefield {
+  display: grid;
+  grid-template: repeat(10, 1fr) / repeat(10, 1fr);
+  place-self: center;
+  width: calc(100vw / 4);
+  height: calc(100vw / 4);
+  background-color: #00000080;
+  border-radius: 5px;
+  cursor: crosshair;
+}
