@@ -1,4 +1,3 @@
-import { ArrangementField } from './ArrangementField/ArrangementField';
 import { EnemyBattlefield } from './EnemyBattlefield/EnemyBattlefield';
 import { EnemyShipList } from './EnemyShipList/EnemyShipList';
 import { FieldCell } from './FieldCell/FieldCell';
@@ -8,4 +7,4 @@ import { Spaceship } from './Spaceship/Spaceship';
 
 
 
-export { ArrangementField, Spaceship, FieldCell, PlayerShipList, EnemyShipList, PlayerBattlefield, EnemyBattlefield };
+export { Spaceship, FieldCell, PlayerShipList, EnemyShipList, PlayerBattlefield, EnemyBattlefield };

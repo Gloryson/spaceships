@@ -42,15 +42,12 @@ export function Spaceship ( {cell}: {cell: Cell} ) {
 
     <div
       className={cell.ship.type}
-
       style={{
         top: `${cell.position.y * 10}%`,
         left: `${cell.position.x * 10}%`,
         zIndex: -1,
         cursor: 'default'
-      }}
-      
-      onDragStart={e => e.preventDefault()}
+      }}   
     ></div>
 
   )

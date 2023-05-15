@@ -9,7 +9,7 @@ interface Field {
 }
 
 const initialState: Field = {
-  field: createRandomFieldMatrix(),
+  field: createRandomFieldMatrix('player'),
   isDragging: false,
   isEditField: true
 }

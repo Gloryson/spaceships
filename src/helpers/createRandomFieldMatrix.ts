@@ -2,14 +2,15 @@ import { checkFreeSpaceForShip } from './checkFreeSpaceForShip';
 import { Cell, Ship } from '../types/interfaces';
 
 
-export function createRandomFieldMatrix (): Cell[][] {
+export function createRandomFieldMatrix ( owner: string ): Cell[][] {
 
   const field: Cell[][] = Array(10).fill(0).map((_, rowIndex) => {
     return Array(10).fill(0).map((_, cellIndex) => {
       return {
         status: 'free', 
         position: {y: rowIndex, x: cellIndex}, 
-        ship: {type: '', length: 0, start: false, dragSection: 0}
+        ship: {type: '', length: 0, start: false, dragSection: 0},
+        own: owner
       }
     })
   })

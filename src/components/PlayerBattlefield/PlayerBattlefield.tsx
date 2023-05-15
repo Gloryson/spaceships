@@ -1,18 +1,21 @@
 import { Fragment } from 'react';
 import { FieldCell, Spaceship } from '../../components';
 import { useAppSelector } from '../../store/store';
-import { Cell } from '../../types/interfaces';
 import './PlayerBattlefield.scss';
 
 
 
-export function PlayerBattlefield () {
+export function PlayerBattlefield ( { size } : { size: string } ) {
 
-  const field: Cell[][] = useAppSelector(state => state.playerField.field);
+  const { field } = useAppSelector(state => state.playerField);
 
   
   return(
-    <div className='player__battlefield'>
+    <div
+      className='player__battlefield'
+      style={{ width: size, height: size }}
+      onDragOver={e => e.preventDefault()}
+    >
       {
         field.map((row, y) => row.map((cell, x) => {
           return cell.ship.start ? (

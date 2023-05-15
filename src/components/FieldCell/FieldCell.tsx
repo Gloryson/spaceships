@@ -1,16 +1,18 @@
 import { setFieldAfterDrop } from '../../store/playerFieldSlice';
 import { useAppDispatch, useAppSelector } from '../../store/store';
 import { Cell } from '../../types/interfaces';
+import { handleShot } from '../../store/enemyFieldSlice';
 import './FieldCell.scss';
 
 
 
 export function FieldCell ( {cell}: {cell: Cell} ) {
 
-  const { isDragging } = useAppSelector(state => state.playerField);
+  const { isDragging, isEditField } = useAppSelector(state => state.playerField);
   const dispatch = useAppDispatch();
 
-  return(
+  return isEditField ? (
+
     <div
       className={`cell  ${isDragging && cell.status === 'correct' ? 'cell__correct' : ''}`}
 
@@ -27,5 +29,15 @@ export function FieldCell ( {cell}: {cell: Cell} ) {
         }
       }}
     ></div>
+
+  ) : (
+
+    <div
+      className={'cell  ' + cell.status}
+      onClick={() => {
+        if (cell.own === 'enemy' && cell.status != 'hit' && cell.status != 'miss') dispatch(handleShot(cell));
+      }}
+    ></div>
+
   )
 }

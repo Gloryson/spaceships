@@ -1,13 +1,12 @@
 import { FieldCell } from '..';
 import { useAppSelector } from '../../store/store';
-import { Cell } from '../../types/interfaces';
 import './EnemyBattlefield.scss';
 
 
 
 export function EnemyBattlefield () {
 
-  const field: Cell[][] = useAppSelector(state => state.playerField.field);
+  const { field } = useAppSelector(state => state.enemyField);
 
   
   return(

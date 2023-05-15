@@ -5,8 +5,14 @@ export interface Ship {
   dragSection: number;
 }
 
+export interface Coordinates {
+  y: number;
+  x: number;
+}
+
 export interface Cell {
   status: string;
-  position: { y: number, x: number };
+  position: Coordinates;
   ship: Ship;
+  own: string;
 }

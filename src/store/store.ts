@@ -1,11 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 import playerFieldSlice from './playerFieldSlice';
+import enemyFieldSlice from './enemyFieldSlice';
 
 
 export const store = configureStore({
   reducer: {
-    playerField: playerFieldSlice
+    playerField: playerFieldSlice,
+    enemyField: enemyFieldSlice
   },
 })
 

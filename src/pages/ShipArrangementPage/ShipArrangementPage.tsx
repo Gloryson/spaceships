@@ -1,4 +1,5 @@
-import { ArrangementField } from '../../components';
+import { Link } from 'react-router-dom';
+import { PlayerBattlefield } from '../../components';
 import { setIsEditField } from '../../store/playerFieldSlice';
 import { useAppDispatch } from '../../store/store';
 import './ShipArrangementPage.scss';
@@ -14,9 +15,11 @@ export function ShipArrangementPage () {
 
       <h1>Arrange your battle space fleet !</h1>
 
-      <ArrangementField />
+      <PlayerBattlefield size='500px'/>
 
-      <button onClick={() => dispatch(setIsEditField(false))}>READY</button>
+      <Link to='/battle'>
+        <button onClick={() => dispatch(setIsEditField(false))}>READY</button>
+      </Link>
       
     </section>
   )
