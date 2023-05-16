@@ -6,11 +6,13 @@ import { Cell, Coordinates } from '../types/interfaces';
 type Field = {
   field: Cell[][];
   ships: Record<string, number>;
+  isEnemyShot: boolean;
 }
 
 const initialState: Field = {
   field: createRandomFieldMatrix('enemy'),
-  ships: { 'destroyer': 4, 'cruiser': 3, 'battleship': 2, 'flagship': 1 }
+  ships: { 'destroyer': 4, 'cruiser': 3, 'battleship': 2, 'flagship': 1 },
+  isEnemyShot: false
 };
 
 
@@ -34,11 +36,20 @@ export const enemyFieldSlice = createSlice({
           state.ships[currCell.ship.type] -= 1;
         }
       }
-      else currCell.status = 'miss';
+      else {
+        currCell.status = 'miss';
+        state.isEnemyShot = true;
+      }
     },
+
+
+    setIsEnemyShot (state, action: PayloadAction<boolean>) {
+      state.isEnemyShot = action.payload;
+    }
+    
 
   }
 })
 
-export const { handleShot } = enemyFieldSlice.actions;
+export const { handleShot, setIsEnemyShot } = enemyFieldSlice.actions;
 export default enemyFieldSlice.reducer;
