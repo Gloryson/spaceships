@@ -2,11 +2,12 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { checkDestroyedShip, checkFreeSpaceForShip, createRandomFieldMatrix, getMissesAroundShip } from '../helpers';
 import { Cell, Coordinates } from '../types/interfaces';
 
-type Field = {
+interface Field {
   field: Cell[][];
   isDragging: boolean;
   isEditField: boolean;
   ships: Record<string, number>;
+  isPlayerVictory: boolean;
 }
 
 const initialState: Field = {
@@ -14,6 +15,7 @@ const initialState: Field = {
   isDragging: false,
   isEditField: true,
   ships: { 'destroyer': 4, 'cruiser': 3, 'battleship': 2, 'flagship': 1 },
+  isPlayerVictory: true
 }
 
 
@@ -90,6 +92,7 @@ export const playerFieldSlice = createSlice({
             field[position.y][position.x].status = 'miss';
           })
           state.ships[currCell.ship.type] -= 1;
+          if (Object.values(state.ships).every(ship => !ship)) state.isPlayerVictory = false;
         }
       }
       else {
@@ -97,8 +100,25 @@ export const playerFieldSlice = createSlice({
       }
     },
 
+
+    setNewPlayerField (state) {
+      state.field = createRandomFieldMatrix('player');
+      state.ships = { 'destroyer': 4, 'cruiser': 3, 'battleship': 2, 'flagship': 1 };
+      state.isEditField = true;
+      state.isPlayerVictory = true;
+    }
+
   }
 })
 
-export const { setIsEditField, setFieldToDragMode, setFieldAfterDrop, handleEnemyShot } = playerFieldSlice.actions;
+export const {
+
+  setIsEditField,
+  setFieldToDragMode,
+  setFieldAfterDrop,
+  handleEnemyShot,
+  setNewPlayerField
+
+} = playerFieldSlice.actions;
+
 export default playerFieldSlice.reducer;

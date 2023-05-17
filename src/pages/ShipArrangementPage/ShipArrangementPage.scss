@@ -17,12 +17,11 @@
     cursor: pointer;
 
     &:hover {
-      border-color: #ff00a6;
-      color: #ff00a6;
+      box-shadow: 0 0 10px 1px #ffffff80;
     }
 
     &:active {
-      border-color: #ff00a6bb;
+      box-shadow: none;
     }
   }
 }

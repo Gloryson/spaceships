@@ -3,16 +3,18 @@ import { checkDestroyedShip, createRandomFieldMatrix, getMissesAroundShip } from
 import { Cell, Coordinates } from '../types/interfaces';
 
 
-type Field = {
+interface Field {
   field: Cell[][];
   ships: Record<string, number>;
   isEnemyShot: boolean;
+  isEnemyVictory: boolean;
 }
 
 const initialState: Field = {
   field: createRandomFieldMatrix('enemy'),
   ships: { 'destroyer': 4, 'cruiser': 3, 'battleship': 2, 'flagship': 1 },
-  isEnemyShot: false
+  isEnemyShot: false,
+  isEnemyVictory: true
 };
 
 
@@ -34,6 +36,7 @@ export const enemyFieldSlice = createSlice({
             field[position.y][position.x].status = 'miss';
           })
           state.ships[currCell.ship.type] -= 1;
+          if (Object.values(state.ships).every(ship => !ship)) state.isEnemyVictory = false;
         }
       }
       else {
@@ -45,11 +48,19 @@ export const enemyFieldSlice = createSlice({
 
     setIsEnemyShot (state, action: PayloadAction<boolean>) {
       state.isEnemyShot = action.payload;
+    },
+
+
+    setNewEnemyField (state) {
+      state.field = createRandomFieldMatrix('enemy');
+      state.ships = { 'destroyer': 4, 'cruiser': 3, 'battleship': 2, 'flagship': 1 };
+      state.isEnemyShot = false;
+      state.isEnemyVictory = true;
     }
     
 
   }
 })
 
-export const { handleShot, setIsEnemyShot } = enemyFieldSlice.actions;
+export const { handleShot, setIsEnemyShot, setNewEnemyField } = enemyFieldSlice.actions;
 export default enemyFieldSlice.reducer;
