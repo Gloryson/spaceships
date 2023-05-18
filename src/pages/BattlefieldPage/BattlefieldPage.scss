@@ -2,4 +2,28 @@
   display: grid;
   grid-template: 1fr / 1fr 2fr 2fr 1fr;
   height: 100vh;
+
+  button {
+    position: absolute;
+    top: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+
+    &:active {
+      transform: translateX(-50%) scale(0.97);
+    }
+  }
+}
+
+.volume {
+  background: url(../../assets/img/svg/music.svg) no-repeat center;
+  background-size: 100%;
+}
+
+.volume-off {
+  background: url(../../assets/img/svg/music-off.svg) no-repeat center;
+  background-size: 100%;
 }

@@ -1,21 +1,19 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { checkDestroyedShip, checkFreeSpaceForShip, createRandomFieldMatrix, getMissesAroundShip } from '../helpers';
-import { Cell, Coordinates } from '../types/interfaces';
+import { Cell, Coordinates, playerField } from '../types/interfaces';
+import explosionSoundPath from '../assets/sounds/explosion.mp3';
+import enemyShotSoundPath from '../assets/sounds/enemy-shot.mp3';
 
-interface Field {
-  field: Cell[][];
-  isDragging: boolean;
-  isEditField: boolean;
-  ships: Record<string, number>;
-  isPlayerVictory: boolean;
-}
 
-const initialState: Field = {
+const initialState: playerField = {
   field: createRandomFieldMatrix('player'),
   isDragging: false,
   isEditField: true,
   ships: { 'destroyer': 4, 'cruiser': 3, 'battleship': 2, 'flagship': 1 },
-  isPlayerVictory: true
+  isPlayerVictory: true,
+  enemyShotSound: new Audio(enemyShotSoundPath),
+  explosionSound: new Audio(explosionSoundPath),
+  isVolume: true
 }
 
 
@@ -23,11 +21,9 @@ export const playerFieldSlice = createSlice({
   name: 'playerField',
   initialState,
   reducers: {
-
     setIsEditField (state, action: PayloadAction<boolean>) {
       state.isEditField = action.payload;
     },
-
 
     setFieldToDragMode (state, action: PayloadAction<Cell>) {
       state.isDragging = true;
@@ -53,7 +49,6 @@ export const playerFieldSlice = createSlice({
       };
     },
 
-
     setFieldAfterDrop (state, action: PayloadAction<Cell>) {
       const row: number = action.payload.position.y;
       const cell: number = action.payload.position.x;
@@ -78,13 +73,15 @@ export const playerFieldSlice = createSlice({
       };
     },
 
-
     handleEnemyShot (state, action: PayloadAction<Cell>) {
       const row: number = action.payload.position.y;
       const cell: number = action.payload.position.x;
       const field: Cell[][] = state.field;
       const currCell: Cell = field[row][cell];
       if (currCell.status === 'ship') {
+        state.explosionSound.pause();
+        state.explosionSound.currentTime = 0.0;
+        if (state.isVolume) state.explosionSound.play();
         currCell.status = 'hit';
         if (checkDestroyedShip(field, row, cell)) {
           const coordinates: Coordinates[] = getMissesAroundShip(field, row, cell);
@@ -96,29 +93,29 @@ export const playerFieldSlice = createSlice({
         }
       }
       else {
+        state.enemyShotSound.pause();
+        state.enemyShotSound.currentTime = 0.0;
+        if (state.isVolume) state.enemyShotSound.play();
         currCell.status = 'miss';
       }
     },
-
 
     setNewPlayerField (state) {
       state.field = createRandomFieldMatrix('player');
       state.ships = { 'destroyer': 4, 'cruiser': 3, 'battleship': 2, 'flagship': 1 };
       state.isEditField = true;
       state.isPlayerVictory = true;
+    },
+
+    setPlayerFieldVolume (state, action: PayloadAction<boolean>) {
+      state.isVolume = action.payload;
     }
 
   }
 })
 
 export const {
-
-  setIsEditField,
-  setFieldToDragMode,
-  setFieldAfterDrop,
-  handleEnemyShot,
-  setNewPlayerField
-
+  setIsEditField, setFieldToDragMode, setFieldAfterDrop, handleEnemyShot, setNewPlayerField, setPlayerFieldVolume
 } = playerFieldSlice.actions;
 
 export default playerFieldSlice.reducer;

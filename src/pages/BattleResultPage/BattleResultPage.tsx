@@ -15,11 +15,11 @@ export function BattleResultPage () {
   return(
     <section className='battle__result__page'>
       <h1>{ isPlayerVictory ? 'VICTORY' : 'DEFEAT' }</h1>
-      <h2 onClick={() => {
+      <button onClick={() => {
         dispatch(setNewPlayerField());
         dispatch(setNewEnemyField());
         navigate('/');
-      }}>PLAY AGAIN</h2>
+      }}>PLAY AGAIN</button>
     </section>
   )
 }

@@ -1,3 +1,24 @@
+export interface enemyField {
+  field: Cell[][];
+  ships: Record<string, number>;
+  isEnemyShot: boolean;
+  isEnemyVictory: boolean;
+  playerShotSound: HTMLAudioElement;
+  explosionSound: HTMLAudioElement;
+  isVolume: boolean;
+}
+
+export interface playerField {
+  field: Cell[][];
+  isDragging: boolean;
+  isEditField: boolean;
+  ships: Record<string, number>;
+  isPlayerVictory: boolean;
+  enemyShotSound: HTMLAudioElement;
+  explosionSound: HTMLAudioElement;
+  isVolume: boolean;
+}
+
 export interface Ship {
   type: string;
   length: number;

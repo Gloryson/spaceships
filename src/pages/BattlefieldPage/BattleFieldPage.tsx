@@ -2,8 +2,8 @@ import { useEffect } from 'react';
 import { EnemyBattlefield, EnemyShipList, PlayerBattlefield, PlayerShipList } from '../../components';
 import { useAppDispatch, useAppSelector } from '../../store/store';
 import { getNewEnemyShot } from '../../helpers/getNewEnemyShot';
-import { handleEnemyShot } from '../../store/playerFieldSlice';
-import { setIsEnemyShot } from '../../store/enemyFieldSlice';
+import { handleEnemyShot, setPlayerFieldVolume } from '../../store/playerFieldSlice';
+import { setEnemyFieldVolume, setIsEnemyShot } from '../../store/enemyFieldSlice';
 import { useNavigate } from 'react-router-dom';
 import './BattlefieldPage.scss';
 
@@ -11,7 +11,7 @@ import './BattlefieldPage.scss';
 
 export function BattlefieldPage () {
 
-  const { isEnemyShot, isEnemyVictory } = useAppSelector(state => state.enemyField);
+  const { isEnemyShot, isEnemyVictory, isVolume } = useAppSelector(state => state.enemyField);
   const { field, isEditField, isPlayerVictory } = useAppSelector(state => state.playerField);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
@@ -40,6 +40,13 @@ export function BattlefieldPage () {
       <PlayerBattlefield size='calc(100vw / 4)' />
       <EnemyBattlefield />
       <EnemyShipList />
+      <button 
+        className={isVolume ? 'volume' : 'volume-off'}
+        onClick={() => {
+          dispatch(setPlayerFieldVolume(!isVolume));
+          dispatch(setEnemyFieldVolume(!isVolume));
+        }}
+      ></button>
     </section>
   )
 }
