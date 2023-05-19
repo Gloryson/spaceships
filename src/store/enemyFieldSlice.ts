@@ -1,8 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { checkDestroyedShip, createRandomFieldMatrix, getMissesAroundShip } from '../helpers';
 import { Cell, Coordinates, enemyField } from '../types/interfaces';
-import explosionSoundPath from '../assets/sounds/explosion.mp3';
-import playerShotSoundPath from '../assets/sounds/player-shot.mp3';
 
 
 const initialState: enemyField = {
@@ -10,8 +8,8 @@ const initialState: enemyField = {
   ships: { 'destroyer': 4, 'cruiser': 3, 'battleship': 2, 'flagship': 1 },
   isEnemyShot: false,
   isEnemyVictory: true,
-  playerShotSound: new Audio(playerShotSoundPath),
-  explosionSound: new Audio(explosionSoundPath),
+  playerShotSound: false,
+  playerExplosionSound: false,
   isVolume: true
 };
 
@@ -26,9 +24,7 @@ export const enemyFieldSlice = createSlice({
       const field: Cell[][] = state.field;
       const currCell: Cell = field[row][cell];
       if (currCell.status === 'ship') {
-        state.explosionSound.pause();
-        state.explosionSound.currentTime = 0.0;
-        if (state.isVolume) state.explosionSound.play();
+        if (state.isVolume) state.playerExplosionSound = true;
         currCell.status = 'hit';
         if (checkDestroyedShip(field, row, cell)) {
           const coordinates: Coordinates[] = getMissesAroundShip(field, row, cell);
@@ -40,9 +36,7 @@ export const enemyFieldSlice = createSlice({
         }
       }
       else {
-        state.playerShotSound.pause();
-        state.playerShotSound.currentTime = 0.0;
-        if (state.isVolume) state.playerShotSound.play();
+        if (state.isVolume) state.playerShotSound = true;
         currCell.status = 'miss';
         state.isEnemyShot = true;
       }
@@ -61,11 +55,18 @@ export const enemyFieldSlice = createSlice({
   
     setEnemyFieldVolume (state, action: PayloadAction<boolean>) {
       state.isVolume = action.payload;
-    } 
+    },
+
+    finishPlayerSound (state) {
+      state.playerShotSound = false;
+      state.playerExplosionSound = false;
+    }
 
   }
 })
 
-export const { handlePlayerShot, setIsEnemyShot, setNewEnemyField, setEnemyFieldVolume } = enemyFieldSlice.actions;
+export const {
+  handlePlayerShot, setIsEnemyShot, setNewEnemyField, setEnemyFieldVolume, finishPlayerSound
+} = enemyFieldSlice.actions;
 
 export default enemyFieldSlice.reducer;

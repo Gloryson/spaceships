@@ -3,8 +3,8 @@ export interface enemyField {
   ships: Record<string, number>;
   isEnemyShot: boolean;
   isEnemyVictory: boolean;
-  playerShotSound: HTMLAudioElement;
-  explosionSound: HTMLAudioElement;
+  playerShotSound: boolean;
+  playerExplosionSound: boolean;
   isVolume: boolean;
 }
 
@@ -14,8 +14,8 @@ export interface playerField {
   isEditField: boolean;
   ships: Record<string, number>;
   isPlayerVictory: boolean;
-  enemyShotSound: HTMLAudioElement;
-  explosionSound: HTMLAudioElement;
+  enemyShotSound: boolean;
+  enemyExplosionSound: boolean;
   isVolume: boolean;
 }
 
