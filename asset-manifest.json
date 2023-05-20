@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/spaceships/static/css/main.0f692f68.css",
-    "main.js": "/spaceships/static/js/main.7d6c75d9.js",
+    "main.js": "/spaceships/static/js/main.678486e3.js",
     "static/media/background-space-long.jpg": "/spaceships/static/media/background-space-long.ad69b8b442dec6453042.jpg",
     "static/media/flagship.png": "/spaceships/static/media/flagship.c1feb12add2467f0f0db.png",
     "static/media/flagship-enemy.png": "/spaceships/static/media/flagship-enemy.2e320648d4d58c1a63d7.png",
@@ -21,6 +21,6 @@
   },
   "entrypoints": [
     "static/css/main.0f692f68.css",
-    "static/js/main.7d6c75d9.js"
+    "static/js/main.678486e3.js"
   ]
 }
