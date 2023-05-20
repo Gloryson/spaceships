@@ -1,0 +1,28 @@
+{
+  "files": {
+    "main.css": "/spaceships/static/css/main.9cb7c908.css",
+    "main.js": "/spaceships/static/js/main.6fd024fc.js",
+    "static/media/background-space-long.jpg": "/spaceships/static/media/background-space-long.ad69b8b442dec6453042.jpg",
+    "static/media/flagship.png": "/spaceships/static/media/flagship.c1feb12add2467f0f0db.png",
+    "static/media/flagship-enemy.png": "/spaceships/static/media/flagship-enemy.2e320648d4d58c1a63d7.png",
+    "static/media/battleship.png": "/spaceships/static/media/battleship.981d88b3f9d59424f464.png",
+    "static/media/cruiser.png": "/spaceships/static/media/cruiser.cf3128ea1a8081adb045.png",
+    "static/media/battleship-enemy.png": "/spaceships/static/media/battleship-enemy.834e9d2a24c06bbb7d16.png",
+    "static/media/cruiser-enemy.png": "/spaceships/static/media/cruiser-enemy.f8a45b51ef23883c8f82.png",
+    "static/media/destroyer-enemy.png": "/spaceships/static/media/destroyer-enemy.b21e6ba9c923e1f7904c.png",
+    "static/media/destroyer.png": "/spaceships/static/media/destroyer.ffe40f23fadc64e77c1f.png",
+    "static/media/enemy-shot.mp3": "/spaceships/static/media/enemy-shot.c71fe0da73455b4dc322.mp3",
+    "static/media/player-shot.mp3": "/spaceships/static/media/player-shot.d7d7b9cbcca64d9f1485.mp3",
+    "static/media/explosion.mp3": "/spaceships/static/media/explosion.d3dce935edd52a6bae07.mp3",
+    "static/media/refresh.svg": "/spaceships/static/media/refresh.2eaee0f08ebb72273a49.svg",
+    "index.html": "/spaceships/index.html",
+    "static/media/music-off.svg": "/spaceships/static/media/music-off.ed73306159d2a9f9e725.svg",
+    "static/media/music.svg": "/spaceships/static/media/music.86cf58fd7f7d868c25a0.svg",
+    "main.9cb7c908.css.map": "/spaceships/static/css/main.9cb7c908.css.map",
+    "main.6fd024fc.js.map": "/spaceships/static/js/main.6fd024fc.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.9cb7c908.css",
+    "static/js/main.6fd024fc.js"
+  ]
+}
