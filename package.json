@@ -1,6 +1,7 @@
 {
   "name": "spaceships",
   "version": "0.1.0",
+  "homepage": "https://gloryson.github.io/spaceships",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",
@@ -17,8 +18,10 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "set \"GENERATE_SOURCEMAP=false\" &&  react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
@@ -44,6 +47,7 @@
     "@reduxjs/toolkit": "^1.9.5",
     "@types/react-redux": "^7.1.25",
     "@types/react-router-dom": "^5.3.3",
+    "gh-pages": "^5.0.0",
     "react-redux": "^8.0.5",
     "react-router-dom": "^6.11.1",
     "sass": "^1.62.1"
