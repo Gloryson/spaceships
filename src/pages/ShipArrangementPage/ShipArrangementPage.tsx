@@ -1,13 +1,14 @@
 import { Link } from 'react-router-dom';
 import { PlayerBattlefield } from '../../components';
-import { setIsEditField } from '../../store/playerFieldSlice';
-import { useAppDispatch } from '../../store/store';
+import { setIsEditField, setNewPlayerField } from '../../store/playerFieldSlice';
+import { useAppDispatch, useAppSelector } from '../../store/store';
 import './ShipArrangementPage.scss';
 
 
 
 export function ShipArrangementPage () {
 
+  const { isEditField } = useAppSelector(state => state.playerField);
   const dispatch = useAppDispatch();
 
   return(
@@ -15,7 +16,14 @@ export function ShipArrangementPage () {
 
       <h1>Arrange your battle space fleet !</h1>
 
-      <PlayerBattlefield size='500px'/>
+      <PlayerBattlefield size='400px'/>
+
+      <div
+        className='refresh'
+        onClick={() => {
+          if (isEditField) dispatch(setNewPlayerField());
+        }}
+      ></div>
 
       <Link to='/battle'>
         <button onClick={() => dispatch(setIsEditField(false))}>READY</button>

@@ -1,37 +1,19 @@
-import { useEffect } from 'react';
 import { EnemyBattlefield, EnemyShipList, PlayerBattlefield, PlayerShipList } from '../../components';
 import { useAppDispatch, useAppSelector } from '../../store/store';
-import { getNewEnemyShot } from '../../helpers/getNewEnemyShot';
-import { handleEnemyShot, setPlayerFieldVolume } from '../../store/playerFieldSlice';
-import { setEnemyFieldVolume, setIsEnemyShot } from '../../store/enemyFieldSlice';
-import { useNavigate } from 'react-router-dom';
+import { setPlayerFieldVolume } from '../../store/playerFieldSlice';
+import { setEnemyFieldVolume } from '../../store/enemyFieldSlice';
+import { useBot } from '../../hooks';
 import './BattlefieldPage.scss';
 
 
 
 export function BattlefieldPage () {
 
-  const { isEnemyShot, isEnemyVictory, isVolume } = useAppSelector(state => state.enemyField);
-  const { field, isEditField, isPlayerVictory } = useAppSelector(state => state.playerField);
+  const { isVolume } = useAppSelector(state => state.enemyField);
   const dispatch = useAppDispatch();
-  const navigate = useNavigate();
 
 
-  useEffect(() => {
-    if (!isPlayerVictory || !isEnemyVictory) navigate('/result');
-    if (isEditField) navigate('/');
-    let enableEnemyStrikes: NodeJS.Timeout;
-    if (isEnemyShot) {
-      enableEnemyStrikes = setInterval(() => {
-        const targetCell = getNewEnemyShot(field);
-        if (!targetCell) return () => clearInterval(enableEnemyStrikes);
-        if (targetCell.status != 'ship') dispatch(setIsEnemyShot(false));
-        dispatch(handleEnemyShot(targetCell));
-      }, 1000)
-    }
-
-    return () => clearInterval(enableEnemyStrikes);
-  }, [isEnemyShot, field, isEditField, isPlayerVictory, isEnemyVictory])
+  useBot();
 
 
   return(

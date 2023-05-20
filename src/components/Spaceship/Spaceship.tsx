@@ -7,9 +7,9 @@ import './Spaceship.scss';
 
 export function Spaceship ( {cell}: {cell: Cell} ) {
 
-  const dispatch = useAppDispatch();
-  const { isEditField } = useAppSelector(state => state.playerField);
   const [zIndexState, setZIndexState] = useState(0);
+  const { isEditField } = useAppSelector(state => state.playerField);
+  const dispatch = useAppDispatch();
 
 
   return isEditField ? (
@@ -25,7 +25,7 @@ export function Spaceship ( {cell}: {cell: Cell} ) {
       }}
 
       onDragStart={e => {
-        const data: Cell = { ...cell, ship: { ... cell.ship, dragSection: Math.floor(e.nativeEvent.offsetX / 50) } };
+        const data: Cell = { ...cell, ship: { ... cell.ship, dragSection: Math.floor(e.nativeEvent.offsetX / 40) } };
         e.dataTransfer.setData('draggableShip', JSON.stringify(data));
         dispatch(setFieldToDragMode(cell));
       }}

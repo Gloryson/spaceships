@@ -1,0 +1,18 @@
+.blocker {
+  display: none;
+}
+
+@media (max-width: 1000px) {
+  .blocker {
+    display: grid;
+    place-content: center;
+    text-align: center;
+    width: 100vw;
+    height: 100vh;
+    background-color: black;
+  }
+
+  #root {
+    display: none;
+  }
+}
